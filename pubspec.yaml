@@ -10,8 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_native_splash: ^2.3.2
+  font_awesome_flutter: ^10.5.0
   google_fonts: ^5.1.0
   http: ^1.1.0
+  intl: ^0.18.1
   shared_preferences: ^2.2.0
 
 dev_dependencies:
@@ -21,3 +23,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+flutter_native_splash:
+  color: '#EEEEEE'

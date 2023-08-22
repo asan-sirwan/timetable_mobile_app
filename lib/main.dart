@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:timetable_mobile_app/utils/routes.dart';
 
 void main() {
   runApp(const MainApp());
@@ -11,13 +12,11 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Student Timetable',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: GoogleFonts.poppins().fontFamily),
-      home: const Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+      routes: appRoutes,
+      initialRoute: '/',
     );
   }
 }
