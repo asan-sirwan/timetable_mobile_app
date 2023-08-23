@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timetable_mobile_app/api/fetch.dart';
 import 'package:timetable_mobile_app/models/course.dart';
 import 'package:timetable_mobile_app/utils/constants.dart';
@@ -26,8 +27,15 @@ class _CoursesListState extends State<CoursesList> {
 
   Future<List<Course>> _getCourses() async {
     List<Course> courses = [];
-    final res =
-        await fetch(url: 'http://10.0.2.2:5286/students/1?detailed=true');
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    int studentId = prefs.getInt('studentId') ?? 0;
+    if (studentId == 0) {
+      return courses;
+    }
+
+    final res = await fetch(
+        url: 'http://10.0.2.2:5286/students/$studentId?detailed=true');
     for (var course in res['courses']) {
       courses.add(Course.fromJson(course));
     }

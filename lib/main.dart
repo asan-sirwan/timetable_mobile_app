@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timetable_mobile_app/utils/routes.dart';
+import 'package:timetable_mobile_app/utils/theme.dart';
 
-void main() {
-  runApp(const MainApp());
-}
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  String initialRoute = prefs.containsKey('studentId') ? '/' : '/login';
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Student Timetable',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: GoogleFonts.poppins().fontFamily),
-      routes: appRoutes,
-      initialRoute: '/',
-    );
-  }
+  Widget app = MaterialApp(
+    title: 'Student Timetable',
+    debugShowCheckedModeBanner: false,
+    theme: appTheme,
+    routes: appRoutes,
+    initialRoute: initialRoute,
+  );
+
+  runApp(app);
 }
